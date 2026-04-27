@@ -7,6 +7,8 @@ import { InventoryItemsService } from "./inventory-items.service"
 export class InventoryItemsController {
   constructor(private readonly service: InventoryItemsService) {}
 
+  // ── Inventory Items ─────────────────────────────────────────────────────────
+
   @Get()
   findAll(@Query("type") type?: string) {
     return this.service.findAll(type)
@@ -20,6 +22,16 @@ export class InventoryItemsController {
   @Get("expiring")
   getExpiring(@Query("days") days?: string) {
     return this.service.getExpiringItems(days ? parseInt(days) : 60)
+  }
+
+  @Get("expired")
+  getExpired() {
+    return this.service.getExpiredItems()
+  }
+
+  @Get("expiry-report")
+  getExpiryReport() {
+    return this.service.getExpiryReport()
   }
 
   @Get("low-stock")
@@ -50,5 +62,47 @@ export class InventoryItemsController {
   @Delete(":id")
   remove(@Param("id") id: string) {
     return this.service.remove(id)
+  }
+
+  // ── Batch Monitoring ────────────────────────────────────────────────────────
+
+  @Get("batches/monitoring-report")
+  getBatchMonitoringReport() {
+    return this.service.getBatchMonitoringReport()
+  }
+
+  @Get("batches/expiring")
+  getExpiringBatches(@Query("days") days?: string) {
+    return this.service.getExpiringBatches(days ? parseInt(days) : 60)
+  }
+
+  @Get("batches/expired")
+  getExpiredBatches() {
+    return this.service.getExpiredBatches()
+  }
+
+  @Get("batches/all")
+  findAllBatches(@Query("itemId") itemId?: string) {
+    return this.service.findAllBatches(itemId)
+  }
+
+  @Get("batches/:batchId")
+  findOneBatch(@Param("batchId") batchId: string) {
+    return this.service.findOneBatch(batchId)
+  }
+
+  @Post(":id/batches")
+  createBatch(@Param("id") id: string, @Body() data: any) {
+    return this.service.createBatch(id, data)
+  }
+
+  @Put("batches/:batchId")
+  updateBatch(@Param("batchId") batchId: string, @Body() data: any) {
+    return this.service.updateBatch(batchId, data)
+  }
+
+  @Delete("batches/:batchId")
+  removeBatch(@Param("batchId") batchId: string) {
+    return this.service.removeBatch(batchId)
   }
 }

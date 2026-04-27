@@ -83,6 +83,13 @@ export const pickingCriteriaEnum = pgEnum("picking_criteria", [
 ]);
 export const receiptTypeEnum = pgEnum("receipt_type", ["par", "ics"]);
 
+export const batchStatusEnum = pgEnum("batch_status", [
+  "active",
+  "expired",
+  "depleted",
+  "recalled",
+]);
+
 // ── Inventory Items ───────────────────────────────────────────────────────────
 export const inventoryItems = pgTable("inventory_items", {
   id: uuid("id").defaultRandom().primaryKey(),
@@ -102,6 +109,28 @@ export const inventoryItems = pgTable("inventory_items", {
   lifespanYears: integer("lifespan_years"),
   acquisitionDate: timestamp("acquisition_date"),
   depreciationRate: numeric("depreciation_rate", { precision: 5, scale: 2 }).default("0"),
+  createdAt: timestamp("created_at").defaultNow().notNull(),
+  updatedAt: timestamp("updated_at").defaultNow().notNull(),
+});
+
+// ── Inventory Batches ─────────────────────────────────────────────────────────
+// Tracks individual batch receipts per inventory item.
+// Enables FEFO/FIFO/LIFO picking, expiry monitoring, and recall management.
+export const inventoryBatches = pgTable("inventory_batches", {
+  id: uuid("id").defaultRandom().primaryKey(),
+  inventoryItemId: uuid("inventory_item_id")
+    .references(() => inventoryItems.id, { onDelete: "cascade" })
+    .notNull(),
+  batchNumber: text("batch_number").notNull(),
+  quantity: integer("quantity").notNull().default(0),
+  remainingQuantity: integer("remaining_quantity").notNull().default(0),
+  unitCost: numeric("unit_cost", { precision: 14, scale: 2 }).notNull().default("0"),
+  expiryDate: timestamp("expiry_date"),
+  manufactureDate: timestamp("manufacture_date"),
+  receivedDate: timestamp("received_date").defaultNow().notNull(),
+  supplierName: text("supplier_name"),
+  status: batchStatusEnum("status").notNull().default("active"),
+  notes: text("notes"),
   createdAt: timestamp("created_at").defaultNow().notNull(),
   updatedAt: timestamp("updated_at").defaultNow().notNull(),
 });
@@ -199,6 +228,7 @@ export const schema = {
   accounts,
   verifications,
   inventoryItems,
+  inventoryBatches,
   purchaseRequests,
   prItems,
   risRecords,
