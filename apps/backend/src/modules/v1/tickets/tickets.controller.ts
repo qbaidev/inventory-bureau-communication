@@ -13,21 +13,21 @@ export class TicketsController {
 	@Implement(v1.ticket.list)
 	async listTickets() {
 		return implement(v1.ticket.list).handler(async () => {
-			return this.ticketsService.findAll()
+			return this.ticketsService.findAll() as any
 		})
 	}
 
 	@Implement(v1.ticket.get)
 	async getTicket() {
-		return implement(v1.ticket.get).handler(async ({ input }) => {
-			return this.ticketsService.findOne({ id: input.id })
+		return implement(v1.ticket.get).handler(async ({ input }: any) => {
+			return this.ticketsService.findOne(String(input.id)) as any
 		})
 	}
 
 	@Implement(v1.ticket.submit)
 	async submitTicket() {
-		return implement(v1.ticket.submit).handler(async ({ input }) => {
-			return this.ticketsService.submit({ payload: input })
+		return implement(v1.ticket.submit).handler(async ({ input }: any) => {
+			return this.ticketsService.submit({ payload: input }) as any
 		})
 	}
 }

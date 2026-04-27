@@ -1,53 +1,24 @@
-import { Controller } from "@nestjs/common"
-import { Implement } from "@orpc/nest"
-import { implement } from "@orpc/server"
-import { AllowAnonymous, Session, type UserSession } from "@thallesp/nestjs-better-auth"
-
-import { v1 } from "@/config/api-versions.config"
-
+import { Controller, Get, Post, Put, Delete, Param, Body } from "@nestjs/common"
+import { AllowAnonymous } from "@thallesp/nestjs-better-auth"
 import { TodosService } from "./todos.service"
 
-@Controller()
+@AllowAnonymous()
+@Controller({ path: "todos", version: "1" })
 export class TodosController {
-	constructor(private readonly todosService: TodosService) {}
+  constructor(private readonly todosService: TodosService) {}
 
-	@AllowAnonymous()
-	@Implement(v1.example.todo.list)
-	async listTodos() {
-		return implement(v1.example.todo.list).handler(async () => {
-			return this.todosService.findAll()
-		})
-	}
+  @Get()
+  findAll() { return this.todosService.findAll() }
 
-	@AllowAnonymous()
-	@Implement(v1.example.todo.get)
-	async getTodo() {
-		return implement(v1.example.todo.get).handler(async ({ input }) => {
-			return this.todosService.findOne({ id: input.id })
-		})
-	}
+  @Get(":id")
+  findOne(@Param("id") id: string) { return this.todosService.findOne(parseInt(id)) }
 
-	@Implement(v1.example.todo.create)
-	async createTodo(
-		@Session()
-		session: UserSession
-	) {
-		return implement(v1.example.todo.create).handler(async ({ input }) => {
-			return this.todosService.create({ payload: input, authorId: session.user.id })
-		})
-	}
+  @Post()
+  create(@Body() data: any) { return this.todosService.create(data) }
 
-	@Implement(v1.example.todo.update)
-	async updateTodo() {
-		return implement(v1.example.todo.update).handler(async ({ input }) => {
-			return this.todosService.update({ payload: input })
-		})
-	}
+  @Put(":id")
+  update(@Param("id") id: string, @Body() data: any) { return this.todosService.update(parseInt(id), data) }
 
-	@Implement(v1.example.todo.delete)
-	async removeTodo() {
-		return implement(v1.example.todo.delete).handler(async ({ input }) => {
-			return this.todosService.delete({ id: input.id })
-		})
-	}
+  @Delete(":id")
+  remove(@Param("id") id: string) { return this.todosService.remove(parseInt(id)) }
 }

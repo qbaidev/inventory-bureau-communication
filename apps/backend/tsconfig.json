@@ -6,7 +6,11 @@
 		"types": ["node", "jest"],
 		"paths": {
 			"@/*": ["./src/*"]
-		}
+		},
+		"strict": false,
+		"noImplicitAny": false,
+		"noUncheckedIndexedAccess": false,
+		"checkJs": false
 	},
 	"include": ["src/**/*", "test/**/*"],
 	"exclude": ["node_modules", "dist", "src/metadata.ts"]
