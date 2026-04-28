@@ -27,6 +27,16 @@ const config: NextConfig = {
 	devIndicators: {
 		position: "bottom-right",
 	},
+
+	/** Proxy API calls through Next.js to avoid cross-origin/WSL2 port issues */
+	async rewrites() {
+		return [
+			{
+				source: "/proxy-api/:path*",
+				destination: "http://localhost:3014/api/:path*",
+			},
+		]
+	},
 }
 
 export default config
