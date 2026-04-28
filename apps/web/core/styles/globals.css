@@ -48,12 +48,9 @@
 
 /* BCS — Bureau of Communications Services
    Primary: Philippine Government Blue #0038A8
-   Sidebar Light: Medium Blue
-   Sidebar Dark: Deep Navy #001F5B
+   Sidebar: Deep Navy #001F5B
    Gold accent: #FCD116
 */
-
-/* ── LIGHT MODE ── */
 :root {
 	--background: oklch(0.965 0.012 264);
 	--foreground: oklch(0.141 0.005 264);
@@ -81,18 +78,17 @@
 	--chart-4: oklch(0.55 0.16 145);
 	--chart-5: oklch(0.65 0.14 220);
 	--radius: 0.5rem;
-	/* Sidebar: Medium-Light Blue */
-	--sidebar: oklch(0.50 0.14 264);
-	--sidebar-foreground: oklch(0.98 0.01 264);
+	/* Sidebar: Medium Navy (lighter) */
+	--sidebar: oklch(0.30 0.12 264);
+	--sidebar-foreground: oklch(0.95 0.02 264);
 	--sidebar-primary: oklch(0.87 0.17 87);
-	--sidebar-primary-foreground: oklch(0.25 0.10 264);
-	--sidebar-accent: oklch(0.58 0.14 264);
-	--sidebar-accent-foreground: oklch(0.99 0.01 264);
-	--sidebar-border: oklch(0.62 0.11 264);
+	--sidebar-primary-foreground: oklch(0.22 0.10 264);
+	--sidebar-accent: oklch(0.38 0.13 264);
+	--sidebar-accent-foreground: oklch(0.97 0.02 264);
+	--sidebar-border: oklch(0.42 0.10 264);
 	--sidebar-ring: oklch(0.87 0.17 87);
 }
 
-/* ── DARK MODE ── */
 .dark {
 	--background: oklch(0.141 0.005 264);
 	--foreground: oklch(0.985 0 0);
@@ -117,7 +113,6 @@
 	--chart-3: oklch(0.577 0.245 27.325);
 	--chart-4: oklch(0.55 0.16 145);
 	--chart-5: oklch(0.65 0.14 220);
-	/* Sidebar: Deep Navy */
 	--sidebar: oklch(0.18 0.09 264);
 	--sidebar-foreground: oklch(0.92 0.02 264);
 	--sidebar-primary: oklch(0.87 0.17 87);

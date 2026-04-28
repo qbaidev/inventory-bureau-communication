@@ -59,11 +59,6 @@ export default function DashboardPage() {
 
   return (
     <div className="space-y-6">
-      {/* DEMO SYSTEM Banner */}
-      <div className="w-full bg-red-600 text-white text-center py-2 px-4 rounded-md font-bold tracking-widest text-sm uppercase">
-        DEMO SYSTEM - NOT FOR PRODUCTION USE
-      </div>
-
       <div>
         <h1 className="text-2xl font-bold text-foreground">Dashboard</h1>
         <p className="text-muted-foreground text-sm mt-1">Bureau of Communications Services — Inventory Overview</p>

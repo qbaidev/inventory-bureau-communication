@@ -3,7 +3,6 @@
 import { usePathname, useRouter } from "next/navigation"
 import Link from "next/link"
 import { useState, useEffect } from "react"
-import { useTheme } from "next-themes"
 import { authClient } from "@/services/better-auth/auth-client"
 import {
   LayoutDashboard,
@@ -18,8 +17,6 @@ import {
   Menu,
   X,
   ChevronRight,
-  Sun,
-  Moon,
 } from "lucide-react"
 
 const NAV_ITEMS = [
@@ -42,7 +39,6 @@ export default function SiteLayout({ children }: { children: React.ReactNode }) 
   const [collapsed, setCollapsed] = useState(false)
   const [mobileOpen, setMobileOpen] = useState(false)
   const [user, setUser] = useState<any>(null)
-  const { theme, setTheme } = useTheme()
 
   useEffect(() => {
     authClient.getSession().then(({ data }) => {
@@ -130,21 +126,6 @@ export default function SiteLayout({ children }: { children: React.ReactNode }) 
             <div className="text-xs text-white/40 capitalize">{user.role?.replace("_", " ") || "User"}</div>
           </div>
         )}
-        {/* Theme Toggle */}
-        <button
-          onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-          className="flex items-center gap-2 w-full px-3 py-2 rounded-lg text-sm text-white/60 hover:bg-white/10 transition-colors mb-1"
-          title={theme === "dark" ? "Switch to Light Mode" : "Switch to Dark Mode"}
-        >
-          {theme === "dark" ? (
-            <Sun className="h-4 w-4 shrink-0" />
-          ) : (
-            <Moon className="h-4 w-4 shrink-0" />
-          )}
-          {(!collapsed || mobile) && (
-            <span>{theme === "dark" ? "Light Mode" : "Dark Mode"}</span>
-          )}
-        </button>
         <button
           onClick={handleLogout}
           className="flex items-center gap-2 w-full px-3 py-2 rounded-lg text-sm text-red-400 hover:bg-red-500/10 transition-colors"
@@ -186,6 +167,11 @@ export default function SiteLayout({ children }: { children: React.ReactNode }) 
         <main className="flex-1 overflow-y-auto p-4 md:p-6">
           {children}
         </main>
+
+        {/* Footer */}
+        <footer className="shrink-0 border-t border-border px-4 py-3 text-center text-xs text-muted-foreground">
+          © 2026 BCS Inventory Management System. All rights reserved.
+        </footer>
       </div>
     </div>
   )
