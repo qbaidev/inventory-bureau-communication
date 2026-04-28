@@ -261,9 +261,9 @@ export default function RISPage() {
                     <SelectValue />
                   </SelectTrigger>
                   <SelectContent>
-                    <SelectItem value="fifo">FIFO — FIRST IN, FIRST OUT</SelectItem>
-                    <SelectItem value="lifo">LIFO — LAST IN, FIRST OUT</SelectItem>
-                    <SelectItem value="fefo">FEFO — FIRST EXPIRY, FIRST OUT</SelectItem>
+                    <SelectItem value="fifo" label="FIFO — FIRST IN, FIRST OUT">FIFO — FIRST IN, FIRST OUT</SelectItem>
+                    <SelectItem value="lifo" label="LIFO — LAST IN, FIRST OUT">LIFO — LAST IN, FIRST OUT</SelectItem>
+                    <SelectItem value="fefo" label="FEFO — FIRST EXPIRY, FIRST OUT">FEFO — FIRST EXPIRY, FIRST OUT</SelectItem>
                   </SelectContent>
                 </Select>
               </div>
@@ -315,7 +315,7 @@ export default function RISPage() {
                                 <div className="px-3 py-2 text-xs text-muted-foreground">No items found</div>
                               ) : (
                                 inventoryItems.map((i: any) => (
-                                  <SelectItem key={i.id} value={i.id}>
+                                  <SelectItem key={i.id} value={i.id} label={`${i.name} (${i.itemCode})`}>
                                     {i.name} ({i.itemCode})
                                   </SelectItem>
                                 ))
