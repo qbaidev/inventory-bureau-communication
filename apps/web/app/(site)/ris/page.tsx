@@ -301,22 +301,29 @@ export default function RISPage() {
                   return (
                     <div key={idx} className="p-3 space-y-2">
                       <div className="flex items-center gap-2">
-                        {/* Item select — uses SelectValue so Base UI updates dynamically */}
+                        {/* Item select — trigger uses React state lookup to guarantee correct display */}
                         <div className="flex-1 min-w-0">
                           <Select
                             value={item.inventoryItemId}
                             onValueChange={v => setItem(idx, "inventoryItemId", v)}
                           >
                             <SelectTrigger className="w-full">
-                              <SelectValue placeholder="Select inventory item..." />
+                              {item.inventoryItemId && inventoryMap[item.inventoryItemId] ? (
+                                <span className="truncate text-sm">
+                                  {inventoryMap[item.inventoryItemId].name}{" "}
+                                  <span className="text-muted-foreground">({inventoryMap[item.inventoryItemId].itemCode})</span>
+                                </span>
+                              ) : (
+                                <span className="text-muted-foreground text-sm">Select inventory item...</span>
+                              )}
                             </SelectTrigger>
                             <SelectContent>
                               {inventoryItems.length === 0 ? (
                                 <div className="px-3 py-2 text-xs text-muted-foreground">No items found</div>
                               ) : (
                                 inventoryItems.map((i: any) => (
-                                  <SelectItem key={i.id} value={i.id} label={`${i.name} (${i.itemCode})`}>
-                                    {i.name} ({i.itemCode})
+                                  <SelectItem key={i.id} value={i.id}>
+                                    {i.name} ({i.itemCode}) — Qty: {i.quantity}
                                   </SelectItem>
                                 ))
                               )}
