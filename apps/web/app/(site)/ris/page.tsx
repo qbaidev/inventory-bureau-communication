@@ -92,7 +92,7 @@ export default function RISPage() {
         </div>
         <div className="flex gap-2">
           <Button size="sm" variant="outline" onClick={load}><RefreshCw className="h-4 w-4" /></Button>
-          <Button onClick={() => setShowForm(true)}><Plus className="h-4 w-4 mr-2" />New RIS</Button>
+          <Button onClick={() => { loadInventory(); setShowForm(true) }}><Plus className="h-4 w-4 mr-2" />New RIS</Button>
         </div>
       </div>
 
@@ -140,7 +140,7 @@ export default function RISPage() {
             <div className="p-3 bg-muted/50 rounded-lg flex gap-2 text-xs text-muted-foreground">
               <Info className="h-4 w-4 shrink-0 mt-0.5" />
               <div>
-                <span className="font-medium">Picking Criteria</span> — FIFO issues oldest batches first, FEFO issues soonest-to-expire first, LIFO issues newest stock first.
+                <span className="font-medium">PICKING CRITERIA</span> — FIFO issues oldest batches first, FEFO issues soonest-to-expire first, LIFO issues newest stock first.
               </div>
             </div>
             <div className="grid grid-cols-2 gap-3">
@@ -152,9 +152,9 @@ export default function RISPage() {
                 <Select value={form.pickingCriteria} onValueChange={v => setForm(f => ({ ...f, pickingCriteria: v }))}>
                   <SelectTrigger><SelectValue /></SelectTrigger>
                   <SelectContent>
-                    <SelectItem value="fifo">FIFO — First In, First Out</SelectItem>
-                    <SelectItem value="lifo">LIFO — Last In, First Out</SelectItem>
-                    <SelectItem value="fefo">FEFO — First Expiry, First Out</SelectItem>
+                    <SelectItem value="fifo">FIFO — FIRST IN, FIRST OUT</SelectItem>
+                    <SelectItem value="lifo">LIFO — LAST IN, FIRST OUT</SelectItem>
+                    <SelectItem value="fefo">FEFO — FIRST EXPIRY, FIRST OUT</SelectItem>
                   </SelectContent>
                 </Select>
               </div>
@@ -171,11 +171,19 @@ export default function RISPage() {
                 {form.items.map((item, idx) => (
                   <div key={idx} className="grid grid-cols-[1fr_80px_32px] gap-2 items-center">
                     <Select value={item.inventoryItemId} onValueChange={v => setItem(idx, "inventoryItemId", v)}>
-                      <SelectTrigger className="w-full"><SelectValue placeholder="Select item..." /></SelectTrigger>
+                      <SelectTrigger className="w-full">
+                        <SelectValue placeholder={inventoryItems.length === 0 ? "Loading items..." : "Select item..."} />
+                      </SelectTrigger>
                       <SelectContent>
-                        {inventoryItems.map((i: any) => (
-                          <SelectItem key={i.id} value={i.id}>{i.name} ({i.itemCode}) — Qty: {i.quantity}</SelectItem>
-                        ))}
+                        {inventoryItems.length === 0 ? (
+                          <div className="px-3 py-2 text-xs text-muted-foreground">No items available</div>
+                        ) : (
+                          inventoryItems.map((i: any) => (
+                            <SelectItem key={i.id} value={i.id}>
+                              {i.name} ({i.itemCode}) — Qty: {i.quantity}
+                            </SelectItem>
+                          ))
+                        )}
                       </SelectContent>
                     </Select>
                     <Input type="number" placeholder="Qty" min={1} value={item.quantity} onChange={e => setItem(idx, "quantity", parseInt(e.target.value) || 1)} />
