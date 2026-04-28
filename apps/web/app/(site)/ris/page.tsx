@@ -167,21 +167,29 @@ export default function RISPage() {
                 <Label>Items to Issue</Label>
                 <Button size="sm" variant="outline" onClick={addItem}><Plus className="h-3 w-3 mr-1" />Add</Button>
               </div>
-              {form.items.map((item, idx) => (
-                <div key={idx} className="grid grid-cols-3 gap-2 mb-2">
-                  <div className="col-span-2">
+              <div className="max-h-52 overflow-y-auto space-y-2 pr-1">
+                {form.items.map((item, idx) => (
+                  <div key={idx} className="grid grid-cols-[1fr_80px_32px] gap-2 items-center">
                     <Select value={item.inventoryItemId} onValueChange={v => setItem(idx, "inventoryItemId", v)}>
-                      <SelectTrigger><SelectValue placeholder="Select inventory item..." /></SelectTrigger>
+                      <SelectTrigger className="w-full"><SelectValue placeholder="Select item..." /></SelectTrigger>
                       <SelectContent>
                         {inventoryItems.map((i: any) => (
                           <SelectItem key={i.id} value={i.id}>{i.name} ({i.itemCode}) — Qty: {i.quantity}</SelectItem>
                         ))}
                       </SelectContent>
                     </Select>
+                    <Input type="number" placeholder="Qty" min={1} value={item.quantity} onChange={e => setItem(idx, "quantity", parseInt(e.target.value) || 1)} />
+                    <button
+                      type="button"
+                      className="text-destructive hover:text-destructive/80 text-xs"
+                      onClick={() => setForm(f => ({ ...f, items: f.items.filter((_, i) => i !== idx) }))}
+                      disabled={form.items.length === 1}
+                    >
+                      ✕
+                    </button>
                   </div>
-                  <Input type="number" placeholder="Qty" value={item.quantity} onChange={e => setItem(idx, "quantity", parseInt(e.target.value))} />
-                </div>
-              ))}
+                ))}
+              </div>
             </div>
           </div>
           <DialogFooter>
@@ -209,12 +217,24 @@ export default function RISPage() {
               {selected.remarks && <div><span className="text-muted-foreground">Remarks:</span> {selected.remarks}</div>}
               {selected.items?.length > 0 && (
                 <div>
-                  <p className="font-medium mb-1">Items Issued:</p>
-                  {selected.items.map((i: any) => (
-                    <div key={i.id} className="text-xs border rounded p-2 mb-1">
-                      Qty: {i.quantity} {i.remarks && `— ${i.remarks}`}
-                    </div>
-                  ))}
+                  <p className="font-medium mb-2">Items Issued:</p>
+                  <div className="space-y-1">
+                    {selected.items.map((i: any) => {
+                      const inv = inventoryItems.find((x: any) => x.id === i.inventoryItemId)
+                      return (
+                        <div key={i.id} className="text-xs border rounded p-2 flex justify-between items-start gap-2">
+                          <div>
+                            <p className="font-medium">{inv ? inv.name : "Unknown Item"}</p>
+                            {inv && <p className="text-muted-foreground">{inv.itemCode}</p>}
+                          </div>
+                          <div className="text-right shrink-0">
+                            <p>Qty: <span className="font-medium">{i.quantity}</span></p>
+                            {i.remarks && <p className="text-muted-foreground">{i.remarks}</p>}
+                          </div>
+                        </div>
+                      )
+                    })}
+                  </div>
                 </div>
               )}
             </div>
