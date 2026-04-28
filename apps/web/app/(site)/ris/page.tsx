@@ -210,7 +210,7 @@ export default function RISPage() {
 
       {/* ── Create Dialog ───────────────────────────────────────────── */}
       <Dialog open={showForm} onOpenChange={setShowForm}>
-        <DialogContent className="max-w-4xl w-[95vw] max-h-[95vh] overflow-y-auto">
+        <DialogContent className="sm:max-w-4xl w-[95vw] max-h-[95vh] overflow-y-auto">
           <DialogHeader>
             <DialogTitle>New Requisition & Issue Slip</DialogTitle>
           </DialogHeader>
