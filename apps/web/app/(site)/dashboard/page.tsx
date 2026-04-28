@@ -17,8 +17,8 @@ function StatCard({ title, value, sub, icon: Icon, accent = false }: any) {
             <p className="text-3xl font-bold mt-1">{value}</p>
             {sub && <p className="text-xs text-muted-foreground mt-1">{sub}</p>}
           </div>
-          <div className={`p-2.5 rounded-lg ${accent ? "bg-destructive/10" : "bg-primary/10"}`}>
-            <Icon className={`h-5 w-5 ${accent ? "text-destructive" : "text-primary"}`} />
+          <div className={`p-2.5 rounded-lg ${accent ? "bg-destructive/10" : "bg-red-500/10"}`}>
+            <Icon className={`h-5 w-5 ${accent ? "text-destructive" : "text-red-500"}`} />
           </div>
         </div>
       </CardContent>
@@ -53,15 +53,15 @@ export default function DashboardPage() {
 
   if (loading) return (
     <div className="flex items-center justify-center h-64">
-      <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary" />
+      <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-red-500" />
     </div>
   )
 
   return (
     <div className="space-y-6">
-      <div>
-        <h1 className="text-2xl font-bold text-foreground">Dashboard</h1>
-        <p className="text-muted-foreground text-sm mt-1">Bureau of Communications Services — Inventory Overview</p>
+      <div className="bg-red-500/10 dark:bg-red-500/20 border border-red-500/30 rounded-xl px-5 py-4">
+        <h1 className="text-2xl font-bold text-red-600 dark:text-red-400">Dashboard</h1>
+        <p className="text-red-500/70 text-sm mt-1">Bureau of Communications Services — Inventory Overview</p>
       </div>
 
       {/* KPI Cards */}
@@ -77,13 +77,13 @@ export default function DashboardPage() {
         <Card>
           <CardHeader className="pb-3">
             <CardTitle className="text-sm font-semibold flex items-center gap-2">
-              <TrendingUp className="h-4 w-4 text-primary" />
+              <TrendingUp className="h-4 w-4 text-red-500" />
               Inventory Breakdown
             </CardTitle>
           </CardHeader>
           <CardContent className="space-y-3">
             {[
-              { label: "Supplies & Materials", value: stats?.supplies ?? 0, color: "bg-primary" },
+              { label: "Supplies & Materials", value: stats?.supplies ?? 0, color: "bg-red-500" },
               { label: "Semi-Expendable", value: stats?.semiExpendable ?? 0, color: "bg-secondary" },
               { label: "Property & Equipment", value: stats?.ppe ?? 0, color: "bg-chart-4" },
             ].map(item => (
@@ -107,7 +107,7 @@ export default function DashboardPage() {
         <Card>
           <CardHeader className="pb-3">
             <CardTitle className="text-sm font-semibold flex items-center gap-2">
-              <ShoppingCart className="h-4 w-4 text-primary" />
+              <ShoppingCart className="h-4 w-4 text-red-500" />
               Purchase Request Status
             </CardTitle>
           </CardHeader>
