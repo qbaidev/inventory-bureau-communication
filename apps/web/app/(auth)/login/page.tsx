@@ -56,7 +56,7 @@ export default function LoginPage() {
       {/* BCS background image at low opacity */}
       <div
         className="absolute inset-0"
-        style={{ backgroundImage: "url('/bcs-bg.svg')", backgroundSize: "cover", backgroundPosition: "center", backgroundRepeat: "no-repeat", opacity: 0.18 }}
+        style={{ backgroundImage: "url('/bcs-building.png')", backgroundSize: "cover", backgroundPosition: "center", backgroundRepeat: "no-repeat", opacity: 0.25 }}
       />
       <div className="w-full max-w-md space-y-4 relative z-10">
         {/* BCS Logo + Header */}
