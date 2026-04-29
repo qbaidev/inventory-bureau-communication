@@ -84,7 +84,11 @@ export default function SiteLayout({ children }: { children: React.ReactNode }) 
     >
       {/* Logo */}
       <div className={`flex items-center gap-3 px-4 py-4 border-b border-[var(--sidebar-border)]`}>
-        <div className="shrink-0">
+        <div
+          className={`shrink-0 ${!mobile ? "cursor-pointer" : ""}`}
+          onClick={() => { if (!mobile) setCollapsed(!collapsed) }}
+          title={collapsed ? "Expand sidebar" : "Collapse sidebar"}
+        >
           <svg width="36" height="36" viewBox="0 0 72 72" fill="none" xmlns="http://www.w3.org/2000/svg">
             <rect width="72" height="72" rx="10" fill="oklch(0.37 0.19 264)" />
             <line x1="36" y1="52" x2="36" y2="22" stroke="white" strokeWidth="3.5" strokeLinecap="round"/>
