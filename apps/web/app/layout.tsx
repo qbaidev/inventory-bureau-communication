@@ -3,7 +3,6 @@ import { Figtree, Geist, Geist_Mono } from "next/font/google"
 
 import { BreakpointIndicator } from "@/core/components/breakpoint-indicator"
 import { Toaster } from "@/core/components/ui/sonner"
-import { ThemeProvider } from "@/core/context/theme-provider"
 import { AuthProvider } from "@/services/better-auth/context/auth-provider"
 import { QueryProvider } from "@/services/tanstack-query/provider"
 
@@ -33,20 +32,13 @@ export default function RootLayout({
 	children: React.ReactNode
 }>) {
 	return (
-		<html lang="en" className={figtree.variable} suppressHydrationWarning>
+		<html lang="en" className={`${figtree.variable} light`}>
 			<body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
 				<AuthProvider>
 					<QueryProvider>
-						<ThemeProvider
-							attribute="class"
-							defaultTheme="system"
-							enableSystem
-							disableTransitionOnChange
-						>
-							<BreakpointIndicator />
-							{children}
-							<Toaster richColors closeButton />
-						</ThemeProvider>
+						<BreakpointIndicator />
+						{children}
+						<Toaster richColors closeButton />
 					</QueryProvider>
 				</AuthProvider>
 			</body>
