@@ -1,0 +1,80 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" width="1200" height="800">
+  <defs>
+    <pattern id="dots" x="0" y="0" width="40" height="40" patternUnits="userSpaceOnUse">
+      <circle cx="2" cy="2" r="1.5" fill="#1e3a8a" opacity="0.3"/>
+    </pattern>
+    <radialGradient id="glow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#3b82f6" stop-opacity="0.15"/>
+      <stop offset="100%" stop-color="#1e3a8a" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <!-- Base background -->
+  <rect width="1200" height="800" fill="#f0f4ff"/>
+
+  <!-- Dot grid -->
+  <rect width="1200" height="800" fill="url(#dots)"/>
+
+  <!-- Central glow -->
+  <ellipse cx="600" cy="400" rx="600" ry="400" fill="url(#glow)"/>
+
+  <!-- === Main BCS Tower (center) === -->
+  <g transform="translate(540, 200)" opacity="0.12">
+    <!-- Tower base -->
+    <line x1="60" y1="320" x2="60" y2="80" stroke="#1e3a8a" stroke-width="8" stroke-linecap="round"/>
+    <line x1="30" y1="320" x2="60" y2="320" stroke="#1e3a8a" stroke-width="8" stroke-linecap="round"/>
+    <line x1="90" y1="320" x2="60" y2="320" stroke="#1e3a8a" stroke-width="8" stroke-linecap="round"/>
+    <line x1="0" y1="320" x2="30" y2="320" stroke="#1e3a8a" stroke-width="6" stroke-linecap="round"/>
+    <line x1="90" y1="320" x2="120" y2="320" stroke="#1e3a8a" stroke-width="6" stroke-linecap="round"/>
+    <!-- Signal arcs -->
+    <path d="M30 180 Q60 140 90 180" stroke="#d97706" stroke-width="6" fill="none" stroke-linecap="round"/>
+    <path d="M15 155 Q60 105 105 155" stroke="#d97706" stroke-width="5" fill="none" stroke-linecap="round" opacity="0.7"/>
+    <path d="M0 130 Q60 68 120 130" stroke="#d97706" stroke-width="4" fill="none" stroke-linecap="round" opacity="0.5"/>
+    <path d="M-15 108 Q60 30 135 108" stroke="#d97706" stroke-width="3" fill="none" stroke-linecap="round" opacity="0.3"/>
+    <!-- Antenna tip dot -->
+    <circle cx="60" cy="80" r="8" fill="#d97706"/>
+  </g>
+
+  <!-- === Left decorative tower (smaller) === -->
+  <g transform="translate(130, 300)" opacity="0.07">
+    <line x1="40" y1="220" x2="40" y2="55" stroke="#1e3a8a" stroke-width="6" stroke-linecap="round"/>
+    <line x1="20" y1="220" x2="60" y2="220" stroke="#1e3a8a" stroke-width="6" stroke-linecap="round"/>
+    <line x1="0" y1="220" x2="20" y2="220" stroke="#1e3a8a" stroke-width="4" stroke-linecap="round"/>
+    <line x1="60" y1="220" x2="80" y2="220" stroke="#1e3a8a" stroke-width="4" stroke-linecap="round"/>
+    <path d="M20 120 Q40 95 60 120" stroke="#d97706" stroke-width="4" fill="none" stroke-linecap="round"/>
+    <path d="M8 103 Q40 72 72 103" stroke="#d97706" stroke-width="3" fill="none" stroke-linecap="round" opacity="0.6"/>
+    <circle cx="40" cy="55" r="5" fill="#d97706"/>
+  </g>
+
+  <!-- === Right decorative tower (smaller) === -->
+  <g transform="translate(990, 280)" opacity="0.07">
+    <line x1="40" y1="240" x2="40" y2="60" stroke="#1e3a8a" stroke-width="6" stroke-linecap="round"/>
+    <line x1="20" y1="240" x2="60" y2="240" stroke="#1e3a8a" stroke-width="6" stroke-linecap="round"/>
+    <line x1="0" y1="240" x2="20" y2="240" stroke="#1e3a8a" stroke-width="4" stroke-linecap="round"/>
+    <line x1="60" y1="240" x2="80" y2="240" stroke="#1e3a8a" stroke-width="4" stroke-linecap="round"/>
+    <path d="M20 135 Q40 108 60 135" stroke="#d97706" stroke-width="4" fill="none" stroke-linecap="round"/>
+    <path d="M8 115 Q40 82 72 115" stroke="#d97706" stroke-width="3" fill="none" stroke-linecap="round" opacity="0.6"/>
+    <circle cx="40" cy="60" r="5" fill="#d97706"/>
+  </g>
+
+  <!-- Horizontal wave lines (signal decoration) -->
+  <g opacity="0.06">
+    <path d="M0 600 Q150 570 300 600 Q450 630 600 600 Q750 570 900 600 Q1050 630 1200 600" stroke="#1e3a8a" stroke-width="3" fill="none"/>
+    <path d="M0 630 Q150 600 300 630 Q450 660 600 630 Q750 600 900 630 Q1050 660 1200 630" stroke="#1e3a8a" stroke-width="2" fill="none"/>
+    <path d="M0 660 Q150 630 300 660 Q450 690 600 660 Q750 630 900 660 Q1050 690 1200 660" stroke="#1e3a8a" stroke-width="1.5" fill="none"/>
+    <path d="M0 690 Q150 660 300 690 Q450 720 600 690 Q750 660 900 690 Q1050 720 1200 690" stroke="#1e3a8a" stroke-width="1" fill="none"/>
+  </g>
+
+  <!-- BCS text watermark -->
+  <text x="600" y="720" text-anchor="middle" font-family="Arial, sans-serif" font-size="64" font-weight="bold" fill="#1e3a8a" opacity="0.06" letter-spacing="12">BUREAU OF COMMUNICATIONS SERVICES</text>
+  <text x="600" y="778" text-anchor="middle" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="#1e3a8a" opacity="0.06" letter-spacing="6">DEPARTMENT OF INFORMATION AND COMMUNICATIONS TECHNOLOGY</text>
+
+  <!-- Concentric rings from tower top -->
+  <g transform="translate(600, 280)" opacity="0.05">
+    <circle cx="0" cy="0" r="80" stroke="#1e3a8a" stroke-width="2" fill="none"/>
+    <circle cx="0" cy="0" r="140" stroke="#1e3a8a" stroke-width="1.5" fill="none"/>
+    <circle cx="0" cy="0" r="200" stroke="#1e3a8a" stroke-width="1" fill="none"/>
+    <circle cx="0" cy="0" r="260" stroke="#1e3a8a" stroke-width="0.8" fill="none"/>
+    <circle cx="0" cy="0" r="320" stroke="#1e3a8a" stroke-width="0.5" fill="none"/>
+  </g>
+</svg>
