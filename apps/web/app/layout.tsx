@@ -22,8 +22,8 @@ const geistMono = Geist_Mono({
 })
 
 export const metadata: Metadata = {
-	title: "Turbo Template",
-	description: "Turborepo monorepo template with Next.js, NestJS, and Flutter",
+	title: "IMS-BCS",
+	description: "Inventory Management System for the Bureau of Communications Services",
 }
 
 export default function RootLayout({
